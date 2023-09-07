@@ -1,5 +1,6 @@
+const { StyleSheet } = require("react-native");
 
-const lightTheme = {
+const lightTheme = StyleSheet.create ({
   container: {
     flex: 1,
     backgroundColor: '#f8f8f8',
@@ -75,9 +76,9 @@ const lightTheme = {
   },
 
 
-};
+});
 
-const darkTheme = {
+const darkTheme = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#333',
@@ -113,7 +114,7 @@ const darkTheme = {
     alignItems: 'center',
   },
   buttonText: {
-    color: '#white',
+    color: '#ffffff',
     fontSize: 20,
   },
   resultContainer: {
@@ -147,7 +148,7 @@ const darkTheme = {
   themeToggleBackground: '#fff',
   themeToggleText: '#fff',
 
-};
+});
 
 export { lightTheme, darkTheme };
 

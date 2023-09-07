@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Alert, View, Text, TextInput, ScrollView, TouchableOpacity, Switch } from 'react-native';
 import NumericInput from 'react-native-numeric-input';
 import { lightTheme, darkTheme } from './styles/Styles';
+import { RadioButton, RadioButtonGroup, Button } from 'react-native-paper';
 
 const App = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -90,8 +91,8 @@ const App = () => {
           }}
           leftButtonBackgroundColor='#2e6153'
           rightButtonBackgroundColor='#2e6153'
-          minValue={1}
-          maxValue={999}
+          minValue={0}
+          maxValue={99}
           style={{ ...theme.numericInput }}
           value={bottles}
           onChange={value => setBottles(value)}
@@ -136,7 +137,20 @@ const App = () => {
         />
       </View>
 
-      <Text style={theme.label}>Sukupuoli</Text>
+      <View>
+      <Text>Sukupuoli</Text>
+      <RadioButton.Group onValueChange={(value) => setGender(value)} value={gender}>
+        <View style={{ flexDirection: 'row', marginBottom: 20 }}>
+          <RadioButton.Item label="Mies" value="male" />
+          <RadioButton.Item label="Nainen" value="female" />
+        </View>
+      </RadioButton.Group>
+      <Button mode="contained" onPress={handleCalculate}>
+        Laske
+      </Button>
+    </View>
+
+{/*       <Text style={theme.label}>Sukupuoli</Text>
       <View style={{ flexDirection: 'row', marginBottom: 20 }}>
         <TouchableOpacity
           style={{ ...theme.button, backgroundColor: gender === 'male' ? '#007AFF' : '#ccc' }}
@@ -154,7 +168,7 @@ const App = () => {
 
       <TouchableOpacity style={theme.button} onPress={handleCalculate}>
         <Text style={theme.buttonText}>Laske</Text>
-      </TouchableOpacity>
+      </TouchableOpacity> */}
 
       {result != null && (
         <View style={[
