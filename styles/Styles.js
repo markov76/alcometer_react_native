@@ -3,13 +3,14 @@ const { StyleSheet } = require("react-native");
 const lightTheme = StyleSheet.create ({
   container: {
     flex: 1,
-    backgroundColor: '#f8f8f8',
+    backgroundColor: '#7fffd4',
     padding: 20,
   },
   darkMode: {
     backgroundColor: '#333',
   },
   heading: {
+    kifontFamily: 'Roboto',
     fontSize: 24,
     fontWeight: 'bold',
     marginBottom: 20,

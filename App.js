@@ -54,7 +54,7 @@ const App = () => {
         <Text style={{ ...theme.themeText, color: theme.buttonText }}>Dark</Text>
       </View>
 
-      <Text style={theme.heading}>Alkomittari</Text>
+      <Text style={theme.heading}>Alkoholimittari</Text>
 
       <Text style={theme.label}>Paino (kg)</Text>
       <TextInput
@@ -127,7 +127,7 @@ const App = () => {
               leftButtonBackgroundColor='#2e6153'
               rightButtonBackgroundColor='#2e6153'
               minValue={1}
-              maxValue={999}
+              maxValue={99}
              
           
           style={{ ...theme.numericInput }}
@@ -174,7 +174,7 @@ const App = () => {
         <View style={[
           theme.resultContainer,
           result < 0.5 ? { backgroundColor: 'rgba(11, 233, 11, 0.866)' } :
-          result < 1.5 ? { backgroundColor: 'rgba(235, 243, 11, 0.974)' } :
+          result < 1.2 ? { backgroundColor: 'rgba(235, 243, 11, 0.974)' } :
           { backgroundColor: 'rgba(234, 9, 9, 0.984)' }
         ]}>
           <Text style={[
