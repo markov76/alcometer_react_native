@@ -3,6 +3,9 @@ import { Alert, View, Text, TextInput, ScrollView, TouchableOpacity, Switch } fr
 import NumericInput from 'react-native-numeric-input';
 import { lightTheme, darkTheme } from './styles/Styles';
 import { RadioButton, RadioButtonGroup, Button } from 'react-native-paper';
+import { useFonts } from 'expo-font';
+
+
 
 const App = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -12,6 +15,14 @@ const App = () => {
   const [time, setTime] = useState(0);
   const [gender, setGender] = useState('male');
   const [result, setResult] = useState(null);
+
+  const [loaded] = useFonts({
+    'Roboto-Regular': require('./assets/fonts/Roboto-Regular.ttf'),
+  });
+  if (!loaded) {
+    return null;
+  }
+
 
   const handleCalculate = () => {
 

@@ -10,7 +10,7 @@ const lightTheme = StyleSheet.create ({
     backgroundColor: '#333',
   },
   heading: {
-    kifontFamily: 'Roboto',
+    fontFamily: 'Roboto-Regular',
     fontSize: 24,
     fontWeight: 'bold',
     marginBottom: 20,
