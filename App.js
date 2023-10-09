@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
-import { Alert, View, Text, TextInput, ScrollView, TouchableOpacity, Switch } from 'react-native';
+import { Alert, View, Text, TextInput, ScrollView, Switch } from 'react-native';
 import NumericInput from 'react-native-numeric-input';
-import { lightTheme, darkTheme } from './styles/Styles';
 import { RadioButton, RadioButtonGroup, Button } from 'react-native-paper';
 import { useFonts } from 'expo-font';
-
-
+import { lightTheme, darkTheme, colors } from './styles/Styles';
 
 const App = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
-  const theme = isDarkMode ? darkTheme : lightTheme;
+  const currentTheme = isDarkMode ? darkTheme : lightTheme;
+  const currentColors = isDarkMode ? colors.dark : colors.light;
+
   const [weight, setWeight] = useState('');
   const [bottles, setBottles] = useState(0);
   const [time, setTime] = useState(0);
@@ -23,9 +23,7 @@ const App = () => {
     return null;
   }
 
-
   const handleCalculate = () => {
-
     if (weight === '') {
       Alert.alert('Huomio', 'Syötä paino ennen laskemista.');
       return; 
@@ -35,7 +33,6 @@ const App = () => {
     const grams = litres * 8 * 4.5;
     const burning = weight / 10;
     const gramsLeft = grams - burning * time; 
-
 
     let bacResult;
     if (gender === 'male') {
@@ -53,151 +50,137 @@ const App = () => {
   };
 
   return (
-    <ScrollView style={[theme.container]}>
-      <View style={theme.themeToggleContainer}>
-        <Text style={{ ...theme.themeText, color: theme.buttonText }}>Light</Text>
+    <ScrollView style={currentTheme.container}>
+      <View style={currentTheme.themeToggleContainer}>
+        <Text style={{ ...currentTheme.themeText, color: currentColors.text }}>Light</Text>
         <Switch
           value={isDarkMode}
           onValueChange={handleThemeToggle}
-          thumbColor={isDarkMode ? '#f4f3f4' : '#007AFF'}
-          trackColor={{ false: '#007AFF', true: '#f4f3f4' }}
+          thumbColor={isDarkMode ? currentColors.switchThumb : currentColors.switchTrack}
+          trackColor={{ false: currentColors.switchTrack, true: currentColors.switchThumb }}
         />
-        <Text style={{ ...theme.themeText, color: theme.buttonText }}>Dark</Text>
+        <Text style={{ ...currentTheme.themeText, color: currentColors.text }}>Dark</Text>
       </View>
 
-      <Text style={theme.heading}>Alkoholimittari</Text>
+      <Text style={currentTheme.heading}>Alkoholimittari</Text>
 
-      <Text style={theme.label}>Paino (kg)</Text>
+      <Text style={currentTheme.label}>Paino (kg)</Text>
       <TextInput
-        style={{ ...theme.input }}
+        style={currentTheme.input}
         keyboardType="numeric"
         value={weight}
         onChangeText={text => setWeight(text)}
       />
 
-      <Text style={theme.label}>Pullojen määrä</Text>
-      <View style={[theme.numericInputContainer, { marginBottom: 20 }]}>
+      <Text style={currentTheme.label}>Pullojen määrä</Text>
+      <View style={[currentTheme.numericInputContainer, { marginBottom: 20 }]}>
         <NumericInput
           totalHeight={55}
           totalWidth={120}
           validateOnBlur={false}
           separatorWidth={0}
           rounded={true}
-          textColor='#2e6153'
-          borderColor='#0000'
+          textColor={currentColors.inputText}
+          borderColor={currentColors.inputBorder}
           inputStyle={{
-              backgroundColor: "#fff",
+              backgroundColor: currentColors.inputBackground,
               borderWidth: 1,
-              borderColor: '#2e6153',
+              borderColor: currentColors.numericInputContainer,
               borderStyle: 'solid',
           }}
           containerStyle={{
-              backgroundColor: '#2e6153',
+              backgroundColor: currentColors.numericInputContainer,
               borderWidth: 1,
-              borderColor: '#2e6153',
+              borderColor: currentColors.numericInputContainer,
               borderStyle: 'solid',
           }}
           iconStyle={{
-              color: '#fff',
+              color: currentColors.iconColor,
           }}
-          leftButtonBackgroundColor='#2e6153'
-          rightButtonBackgroundColor='#2e6153'
+          leftButtonBackgroundColor={currentColors.numericInputContainer}
+          rightButtonBackgroundColor={currentColors.numericInputContainer}
           minValue={0}
           maxValue={99}
-          style={{ ...theme.numericInput }}
           value={bottles}
           onChange={value => setBottles(value)}
         />
       </View>
 
-      <Text style={theme.label}>Aika (tunteina)</Text>
+      <Text style={currentTheme.label}>Aika (tunteina)</Text>
       <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 20 }}>
         <NumericInput
-              totalHeight={55}
-              totalWidth={120}
-              validateOnBlur={false}
-              separatorWidth={0}
-              rounded={true}
-              textColor='#2e6153'
-              borderColor='#0000'
-              inputStyle={{
-                  backgroundColor: "#fff",
-                  borderWidth: 1,
-                  borderColor: '#2e6153',
-                  borderStyle: 'solid',
-              }}
-              containerStyle={{
-                  backgroundColor: '#2e6153',
-                  borderWidth: 1,
-                  borderColor: '#2e6153',
-                  borderStyle: 'solid',
-              }}
-              iconStyle={{
-                  color: '#fff',
-              }}
-              leftButtonBackgroundColor='#2e6153'
-              rightButtonBackgroundColor='#2e6153'
-              minValue={1}
-              maxValue={99}
-             
-          
-          style={{ ...theme.numericInput }}
+          totalHeight={55}
+          totalWidth={120}
+          validateOnBlur={false}
+          separatorWidth={0}
+          rounded={true}
+          textColor={currentColors.inputText}
+          borderColor={currentColors.inputBorder}
+          inputStyle={{
+              backgroundColor: currentColors.inputBackground,
+              borderWidth: 1,
+              borderColor: currentColors.numericInputContainer,
+              borderStyle: 'solid',
+          }}
+          containerStyle={{
+              backgroundColor: currentColors.numericInputContainer,
+              borderWidth: 1,
+              borderColor: currentColors.numericInputContainer,
+              borderStyle: 'solid',
+          }}
+          iconStyle={{
+              color: currentColors.iconColor,
+          }}
+          leftButtonBackgroundColor={currentColors.numericInputContainer}
+          rightButtonBackgroundColor={currentColors.numericInputContainer}
+          minValue={1}
+          maxValue={99}
           value={time}
           onChange={value => setTime(value)}
-          
         />
       </View>
 
       <View>
-      <Text>Sukupuoli</Text>
-      <RadioButton.Group onValueChange={(value) => setGender(value)} value={gender}>
+    <Text style={{ ...currentTheme.label, color: currentColors.text }}>Sukupuoli</Text>
+    <RadioButton.Group onValueChange={(value) => setGender(value)} value={gender}>
         <View style={{ flexDirection: 'row', marginBottom: 20 }}>
-          <RadioButton.Item label="Mies" value="male" />
-          <RadioButton.Item label="Nainen" value="female" />
+            <RadioButton.Item 
+                label="Mies" 
+                value="male" 
+                color={currentColors.text} 
+                labelStyle={{ color: currentColors.text }} 
+            />
+            <RadioButton.Item 
+                label="Nainen" 
+                value="female" 
+                color={currentColors.text} 
+                labelStyle={{ color: currentColors.text }} 
+            />
         </View>
-      </RadioButton.Group>
-      <Button mode="contained" onPress={handleCalculate}>
+    </RadioButton.Group>
+    <Button mode="contained" onPress={handleCalculate}>
         Laske
-      </Button>
-    </View>
-
-{/*       <Text style={theme.label}>Sukupuoli</Text>
-      <View style={{ flexDirection: 'row', marginBottom: 20 }}>
-        <TouchableOpacity
-          style={{ ...theme.button, backgroundColor: gender === 'male' ? '#007AFF' : '#ccc' }}
-          onPress={() => setGender('male')}
-        >
-          <Text style={theme.buttonText}>Mies</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={{ ...theme.button, backgroundColor: gender === 'female' ? '#ea10b4' : '#ccc', marginLeft: 10 }}
-          onPress={() => setGender('female')}
-        >
-          <Text style={theme.buttonText}>Nainen</Text>
-        </TouchableOpacity>
-      </View>
-
-      <TouchableOpacity style={theme.button} onPress={handleCalculate}>
-        <Text style={theme.buttonText}>Laske</Text>
-      </TouchableOpacity> */}
+    </Button>
+</View>
 
       {result != null && (
         <View style={[
-          theme.resultContainer,
-          result < 0.5 ? { backgroundColor: 'rgba(11, 233, 11, 0.866)' } :
-          result < 1.2 ? { backgroundColor: 'rgba(235, 243, 11, 0.974)' } :
-          { backgroundColor: 'rgba(234, 9, 9, 0.984)' }
+          currentTheme.resultContainer,
+          result < 0.5 ? { backgroundColor: currentColors.safeResult } :
+          result < 1.2 ? { backgroundColor: currentColors.warningResult } :
+          { backgroundColor: currentColors.dangerResult }
         ]}>
           <Text style={[
-            theme.resultText,
-            { color: 'black' }
+            currentTheme.resultText,
+            { color: currentColors.resultText }
           ]}>
             Tulos: {result}
           </Text>
         </View>
       )}
     </ScrollView>
-  );
+);
+
 };
 
 export default App;
